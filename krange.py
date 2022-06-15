@@ -6,9 +6,24 @@ class Range:
     low_limit = None
     high_limit = None
 
-    def __init__(self, low_limit, high_limit) -> None:
-        self.low_limit = low_limit
-        self.high_limit = high_limit
+    def __init__(self, input_range: str) -> None:
+        values = input_range.strip().split(",")
+
+        if (values[0][0] == "["):
+            self.low_limit = int(values[0][1])
+            pass
+
+        else:
+            self.low_limit = int(values[0][1]) + 1
+            pass
+
+        if (values[1][1] == "]"):
+            self.high_limit = int(values[1][1])
+            pass
+
+        else:
+            self.high_limit = int(values[1][1]) - 1
+            pass
         pass
 
     def contains(self, values_to_check):
@@ -25,4 +40,7 @@ class Range:
 
         return True
     
+
+    def getAllPoints(self):
+        pass
     pass
