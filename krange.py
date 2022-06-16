@@ -41,6 +41,16 @@ class Range:
         return True
     
 
-    def getAllPoints(self):
-        pass
-    pass
+    def getAllPoints(self,values_to_check):
+         """
+            Returns true if the values are all of range.
+        """
+        
+         for value in values_to_check:
+            if (value in range(self.low_limit, self.high_limit, 1)):
+                continue
+
+            else:
+                return False
+
+         return True
