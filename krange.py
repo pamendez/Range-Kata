@@ -1,56 +1,26 @@
+ALLOWED_CHARACTERS = { "[", "]", "(", ")", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", " ", "," }
+
 class Range:
     """
-        Represents the range class for the kata.
+        Serves as the range class for operations using interval inputs.
     """
 
-    low_limit = None
-    high_limit = None
+    def __init__(self, input_range) -> None:
+        """
+            Serves as the constructor of the class.
 
-    def __init__(self, input_range: str) -> None:
-        values = input_range.strip().split(",")
+            Arguments
+            -------------
+            input_range: Serves as the input range.
 
-        if (values[0][0] == "["):
-            self.low_limit = int(values[0][1])
-            pass
+            Exceptions
+            -------------
+            SyntaxError: Throws this exception if the input is not formatted properly.
+        """
 
-        else:
-            self.low_limit = int(values[0][1]) + 1
-            pass
+        if not (all(range_symbol in ALLOWED_CHARACTERS for range_symbol in input_range)):
+            raise SyntaxError("The range input has invalid symbols or is not formatted properly.")
 
-        if (values[1][1] == "]"):
-            self.high_limit = int(values[1][1])
-            pass
-
-        else:
-            self.high_limit = int(values[1][1]) - 1
-            pass
+        if not (input_range.startswith(("(", "[") and input_range.endswith((")", "]")))):
+            raise SyntaxError("The range is not closed.")
         pass
-
-    def contains(self, values_to_check):
-        """
-            Returns true if the values are contianed in the range.
-        """
-        
-        for value in values_to_check:
-            if (value in range(self.low_limit, self.high_limit, 1)):
-                continue
-
-            else:
-                return False
-
-        return True
-    
-
-    def getAllPoints(self,values_to_check):
-         """
-            Returns true if the values are all of range.
-        """
-        
-         for value in values_to_check:
-            if (value in range(self.low_limit, self.high_limit, 1)):
-                continue
-
-            else:
-                return False
-
-         return True
