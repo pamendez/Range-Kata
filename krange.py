@@ -21,6 +21,13 @@ class Range:
         if not (all(range_symbol in ALLOWED_CHARACTERS for range_symbol in input_range)):
             raise SyntaxError("The range input has invalid symbols or is not formatted properly.")
 
-        if not (input_range.startswith(("(", "[") and input_range.endswith((")", "]")))):
+        if not (input_range.startswith(("(", "[")) and input_range.endswith((")", "]"))):
             raise SyntaxError("The range is not closed.")
+        
+        if not (input_range.split(",")):
+            raise SyntaxError("The range is not valid")
         pass
+
+     
+        
+    
