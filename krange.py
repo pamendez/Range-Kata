@@ -5,7 +5,7 @@ class Range:
         Serves as the range class for operations using interval inputs.
     """
 
-    def __init__(self, input_range) -> None:
+    def __init__(self, input_range: str) -> None:
         """
             Serves as the constructor of the class.
 
@@ -24,13 +24,21 @@ class Range:
         if not (input_range.startswith(("(", "[")) and input_range.endswith((")", "]"))):
             raise SyntaxError("The range is not closed.")
         
-        a = input_range[0] 
-
+        lower_bound = input_range[0] 
+        upper_bound = input_range[-1]
+        input_range = input_range.replace(lower_bound, None, 1)
+        input_range = input_range.replace(upper_bound, None, 1)
         limits = input_range.split(",");
 
         if not (len(limits) == 2):
-            raise ValueError("The range is not valid")
-            
+            raise IndexError("The range has more or less than two components.")
+
+        for limit in limits:
+            limit = limit.strip()
+            if not (limit.isdigit()):
+                raise Exception("The range has invalid numbers.")
+
+
         pass
 
      
