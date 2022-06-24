@@ -6,6 +6,7 @@ class Range:
     """
     
     endpoints = None
+    allpoints = None
     endpoint_symbols = None
 
     def __init__(self, input_range: str) -> None:
@@ -56,6 +57,8 @@ class Range:
           raise ValueError("The lower limit cant be greater than the upper limit in the range");
 
         self.endpoint_symbols = [lower_bound, upper_bound]
+        self.allpoints = self.getAllPoints()
+
         pass
 
     def to_string(self):
@@ -64,16 +67,25 @@ class Range:
         """       
         return f"{self.endpoint_symbols[0]}{self.endpoints[0]},{self.endpoints[1]}{self.endpoint_symbols[1]}"
 
-    def contains(self,range_value:list):
-      """
-           Returns True if the values contains on range.
-           Otherwise, returns False.
-      """
+    def getAllPoints(self):
       index = self.endpoints[0]
       interval = []
       while index <= self.endpoints[1]:
          interval.append(index)
          index += 1
-         pass
+         pass 
+
+      return interval
+
+    def contains(self,range_value:list):
+        """
+           Returns True if the values contains on range.
+           Otherwise, returns False.
+        """
+
+        is_contained = True
+
+        for value in self.allpoints:
+            pass
       
 

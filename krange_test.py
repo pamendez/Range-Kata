@@ -48,6 +48,17 @@ class TestRangeConstructor:
         rng = Range(input_range)
         assert type(rng) is Range
         pass
+
+    def test_with_valid_range_return_allpoints(Self):
+        input_range = "[3, 7]"
+        rng = Range(input_range)
+        assert rng.allpoints == [3, 4, 5, 6, 7]
+    pass
+
+    def test_with_valid_range_return_allpoints(Self):
+        input_range = "(3, 8)"
+        rng = Range(input_range)
+        assert rng.allpoints == [4, 5, 6, 7]
     pass
 
 class TestRangeAsString:
