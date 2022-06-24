@@ -4,7 +4,7 @@ class Range:
     """
         Serves as the range class for operations using interval inputs.
     """
-
+    endpoint = None
     def __init__(self, input_range: str) -> None:
         """
             Serves as the constructor of the class.
@@ -26,20 +26,31 @@ class Range:
         
         lower_bound = input_range[0] 
         upper_bound = input_range[-1]
-        input_range = input_range.replace(lower_bound, None, 1)
-        input_range = input_range.replace(upper_bound, None, 1)
+        input_range = input_range.replace(lower_bound, "", 1)
+        input_range = input_range.replace(upper_bound, "", 1)
         limits = input_range.split(",");
 
         if not (len(limits) == 2):
             raise IndexError("The range has more or less than two components.")
-
+        
+        self.endpoint = []
         for limit in limits:
             limit = limit.strip()
             if not (limit.isdigit()):
                 raise Exception("The range has invalid numbers.")
+            
+            numberLimit = int(limit)
+            self.endpoint.append(numberLimit)
 
+        # Validate intervals symbols
+        if(lower_bound == "("):
+           self.endpoint[0] += 1
+       
+        
 
         pass
+
+
 
      
         

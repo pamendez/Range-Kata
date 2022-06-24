@@ -27,7 +27,14 @@ class TestRangeConstructor:
         pass
 
     def test_with_valid_input(self):
-        input_range = "[3,4]"
+        input_range = "[3, 4]"
         rng = Range(input_range)
         assert type(rng) is Range
         pass
+    
+    def test_with_valid_input_return_endpoint(self):
+        input_range = "(2, 4]"
+        rng = Range(input_range)
+        assert rng.endpoint == [3,4]
+        pass
+ 
