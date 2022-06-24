@@ -46,8 +46,11 @@ class Range:
         if(lower_bound == "("):
            self.endpoint[0] += 1
        
-        
+        if(upper_bound == ")"):
+            self.endpoint[1] -= 1
 
+        if(self.endpoint[0] > self.endpoint[1]):
+          raise ValueError("The lower limit cant be greater than the upper limit in the range");
         pass
 
 

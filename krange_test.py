@@ -37,4 +37,14 @@ class TestRangeConstructor:
         rng = Range(input_range)
         assert rng.endpoint == [3,4]
         pass
+
+    def test_with_invalid_input_throws_value_error(self):
+        input_range = "(6, 4]"
+        with pytest.raises(ValueError):
+            rng = Range(input_range)
+
+    def test_with_valid_input_doesnt_throws_value_error(self):
+        input_range = "(6, 4]"
+        with pytest.raises(ValueError):
+            rng = Range(input_range)
  
