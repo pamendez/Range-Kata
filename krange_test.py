@@ -8,34 +8,28 @@ class TestRangeConstructor:
             rng = Range(input_range)
         pass
 
-    def test_with_invalid_symbols_throws_syntax_error(self):
-        input_range = "{}"
+    @pytest.mark.parametrize("input_range", [("{}"), ("||"), ("//")])
+    def test_with_invalid_symbols_throws_syntax_error(self, input_range):
         with pytest.raises(SyntaxError):
             rng = Range(input_range)
         pass
 
-    def test_with_invalid_input_throws_index_error(self):
-        input_range = "[6   ,   4,     5]"
+    @pytest.mark.parametrize("input_range", [("(4, 5, 6, 7)"), ("[555, 0, 11]"), ("[77, 12, 444]")])
+    def test_with_invalid_input_throws_index_error(self, input_range):
         with pytest.raises(IndexError):
             rng = Range(input_range)
         pass
 
-    def test_with_invalid_numbers_throws_exception(self):
-        input_range = "[(, ))"
+    @pytest.mark.parametrize("input_range", [("[(,)]"), ("[[,]]")])
+    def test_with_invalid_numbers_throws_exception(self, input_range):
         with pytest.raises(Exception):
             rng = Range(input_range)
-        pass
-
-    def test_with_valid_input(self):
-        input_range = "[3, 4]"
-        rng = Range(input_range)
-        assert type(rng) is Range
         pass
     
     def test_with_valid_input_return_endpoint(self):
         input_range = "(2, 4]"
         rng = Range(input_range)
-        assert rng.endpoint == [3,4]
+        assert rng.endpoints == [3,4]
         pass
 
     def test_with_invalid_input_throws_value_error(self):
@@ -44,7 +38,25 @@ class TestRangeConstructor:
             rng = Range(input_range)
 
     def test_with_valid_input_doesnt_throws_value_error(self):
-        input_range = "(6, 4]"
-        with pytest.raises(ValueError):
-            rng = Range(input_range)
- 
+        input_range = "[2, 4]"
+        rng = Range(input_range)
+        assert type(rng) is Range
+
+        
+    def test_with_valid_input(self):
+        input_range = "[3, 4]"
+        rng = Range(input_range)
+        assert type(rng) is Range
+        pass
+    pass
+
+class TestRangeAsString:
+    def test_show_range_as_formatted_string(self):
+        input_range = "[4,               10]"
+        rng = Range(input_range)
+        assert rng.to_string() == "[4,10]"
+        pass
+    pass
+
+class TestRangeContains:
+    pass
