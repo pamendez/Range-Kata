@@ -24,8 +24,13 @@ class Range:
         if not (input_range.startswith(("(", "[")) and input_range.endswith((")", "]"))):
             raise SyntaxError("The range is not closed.")
         
-        if not (input_range.split(",")):
-            raise SyntaxError("The range is not valid")
+        a = input_range[0] 
+
+        limits = input_range.split(",");
+
+        if not (len(limits) == 2):
+            raise ValueError("The range is not valid")
+            
         pass
 
      
