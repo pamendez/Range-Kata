@@ -59,4 +59,9 @@ class TestRangeAsString:
     pass
 
 class TestRangeContains:
+
+    def test_range_contains_elements(self):
+        input_range= "[2,6)"
+        rng = Range(input_range)
+        assert rng.contains(range_value = [2,4])  
     pass

@@ -61,6 +61,19 @@ class Range:
     def to_string(self):
         """
             Returns the range as a formatted string.
-        """
-        
+        """       
         return f"{self.endpoint_symbols[0]}{self.endpoints[0]},{self.endpoints[1]}{self.endpoint_symbols[1]}"
+
+    def contains(self,range_value:list):
+      """
+           Returns True if the values contains on range.
+           Otherwise, returns False.
+      """
+      index = self.endpoints[0]
+      interval = []
+      while index <= self.endpoints[1]:
+         interval.append(index)
+         index += 1
+         pass
+      
+
