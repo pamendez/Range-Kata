@@ -108,9 +108,11 @@ class Range:
                 raise ValueError("The input set is empty.")
 
             for value in elements:
-                if not (value.isdigit()):
+                if not (type(value) is int):                   
+                 if not (value.isdigit()):
                     raise Exception("A value in the set is not a digit")
                     
+                value = int(value)
                 if not (value in self.allpoints):
                     is_contained = False
                     break

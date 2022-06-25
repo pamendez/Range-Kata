@@ -91,8 +91,8 @@ class TestRangeContainsElements:
         rng = Range(input_range)
         with pytest.raises(TypeError):
             rng.contains(range_or_elements=["j"])
-    pass
-    def test_with_range_contains_valid_type_but_invalid_carather_throws_Type_error(self):
+    
+    def test_with_range_contains_valid_type_but_invalid_carather_throws_exception(self):
         input_range = "[1, 4]"
         rng = Range(input_range)
         with pytest.raises(Exception):
@@ -117,10 +117,17 @@ class TestRangeContainsOtherRange:
     pass
 
 class TestRangeEqualsOtherRange:
-    @pytest.mark.parametrize("input_range1, input_range2", [("[2,5)", "[7,10)"), ("[2,5)", "[3,10)"), ("[3,5)", "[2,10)")])
-    def test_range_doesnt_contains_another_range(self,input_range1,input_range2):
+    @pytest.mark.parametrize("input_range1, input_range2", [("[3,5) ", "[3,5) ")])
+    def test_range_equals_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
-        assert rng1.contains(range_or_elements=rng2) == False
+        assert rng1.equals(_range = rng2) == True
+        pass
+
+    @pytest.mark.parametrize("input_range1, input_range2", [("[2,10) ", "[3,5)"), ("[2,5) ", "[3,10)"), ("[3,5) ", "[2,10)")])
+    def test_range_not_equals_another_range(self,input_range1,input_range2):
+        rng1 = Range(input_range1)
+        rng2 = Range(input_range2)
+        assert rng1.equals(_range = rng2) == False
         pass
     pass
