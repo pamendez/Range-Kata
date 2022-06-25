@@ -85,6 +85,18 @@ class TestRangeContainsElements:
         rng = Range(input_range)
         with pytest.raises(ValueError):
             rng.contains(range_or_elements=set())
+    
+    def test_with_range_contains_invalid_type_throws_Type_error(self):
+        input_range = "[1, 4]"
+        rng = Range(input_range)
+        with pytest.raises(TypeError):
+            rng.contains(range_or_elements=["j"])
+    pass
+    def test_with_range_contains_valid_type_but_invalid_carather_throws_Type_error(self):
+        input_range = "[1, 4]"
+        rng = Range(input_range)
+        with pytest.raises(Exception):
+            rng.contains(range_or_elements=set(["2","3","4","j"]))
     pass
 
 class TestRangeContainsOtherRange:
@@ -101,5 +113,14 @@ class TestRangeContainsOtherRange:
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
         assert rng1.contains(range_or_elements= rng2) == True
+        pass
+    pass
+
+class TestRangeEqualsOtherRange:
+    @pytest.mark.parametrize("input_range1, input_range2", [("[2,5)", "[7,10)"), ("[2,5)", "[3,10)"), ("[3,5)", "[2,10)")])
+    def test_range_doesnt_contains_another_range(self,input_range1,input_range2):
+        rng1 = Range(input_range1)
+        rng2 = Range(input_range2)
+        assert rng1.contains(range_or_elements=rng2) == False
         pass
     pass

@@ -97,16 +97,20 @@ class Range:
 
             Exceptions
             -----------
-            TBA.
+            ValueError
+            TypeError
         """
 
         is_contained = True
-        if (type(range_or_elements) is set):            
+        if (type(range_or_elements) is set):      
             elements = range_or_elements
             if not (len(elements) > 0):
                 raise ValueError("The input set is empty.")
 
             for value in elements:
+                if not (value.isdigit()):
+                    raise Exception("A value in the set is not a digit")
+                    
                 if not (value in self.allpoints):
                     is_contained = False
                     break
@@ -123,6 +127,7 @@ class Range:
             pass
 
         else:
+            raise TypeError("The type of the input is invalid")
             pass
 
         return is_contained
