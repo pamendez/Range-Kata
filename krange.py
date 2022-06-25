@@ -144,12 +144,29 @@ class Range:
 
             Arguments:
             ------------
-
-
+           _range
+ 
             Exceptions:
-            ------------
-            
+            ------------   
         """
-
+        if (_range.endpoints[0] == self.endpoints[0] and _range.endpoints[1] == self.endpoints[1]):
+            return True
+        else: 
+            return False 
         pass
     pass
+
+    def overlapsRange(self,_range):
+        """
+         Given another range, if the points are overlaps between the two
+         it returns True. Otherwise it returns False.
+
+            Arguments:
+            ------------
+           _range
+ 
+            Exceptions:
+            ------------ 
+        
+        """
+        pass
