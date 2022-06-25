@@ -82,7 +82,7 @@ class TestRangeContainsElements:
     pass
 
 class TestRangeContainsOtherRange:
-    @pytest.mark.parametrize("input_range1","input_range2", [("[2,5)","[7,10)"), ("[2,5)", "[3,10)"), ("[3,5)", "[2,10)")])
+    @pytest.mark.parametrize("input_range1, input_range2", [("[2,5)", "[7,10)"), ("[2,5)", "[3,10)"), ("[3,5)", "[2,10)")])
     def test_range_doesnt_contains_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
@@ -90,7 +90,7 @@ class TestRangeContainsOtherRange:
         pass
     pass
 
-    @pytest.mark.parametrize("input_range1","input_range2", [("[2,10)","[3,5]"), ("[3,5]", "[3,5)")])
+    @pytest.mark.parametrize("input_range1, input_range2", [("[2,10)","[3,5]"), ("[3,5]", "[3,5)")])
     def test_range_contains_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)

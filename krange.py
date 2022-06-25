@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 ALLOWED_CHARACTERS = { "[", "]", "(", ")", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", " ", "," }
 
 class Range:
@@ -77,7 +79,7 @@ class Range:
 
       return interval
 
-    def contains(self, elements:list):
+    def contains(self, elements:set):
         """
            Returns True if the values contains on range.
            Otherwise, returns False.
@@ -94,5 +96,20 @@ class Range:
             pass
 
         return is_contained
+
+
+    def constains(self, range_:Range):
+        """
+           Returns True if the ranges contains on range.
+           Otherwise, returns False.
+        """
+
+        is_contained = True
+        if not (self.endpoints[0] <= range_.endpoints[0] and range_.endpoints[1] <= self.endpoints[1]):
+            is_contained = False
+            pass
+
+        return is_contained
+    
       
 
