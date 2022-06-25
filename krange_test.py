@@ -69,10 +69,20 @@ class TestRangeAsString:
         pass
     pass
 
-class TestRangeContains:
-
+class TestRangeContainsElements:
     def test_range_contains_elements(self):
         input_range= "[2,6)"
         rng = Range(input_range)
-        assert rng.contains(range_value = [2,4])  
+        assert rng.contains(elements=[2,4]) == True
+    
+    def test_range_does_not_contains_elements(self):
+        input_range = "[2,6)"
+        rng = Range(input_range)
+        assert rng.contains(elements=[-1, 1, 6, 10]) == False
+    pass
+
+class TestRangeContainsOtherRange:
+    def test_range_contains_another_range(self):
+        # ¡No deberia de pasar!
+        pass
     pass

@@ -77,15 +77,22 @@ class Range:
 
       return interval
 
-    def contains(self,range_value:list):
+    def contains(self, elements:list):
         """
            Returns True if the values contains on range.
            Otherwise, returns False.
         """
 
         is_contained = True
+        for value in elements:
+            if not (value in self.allpoints):
+                is_contained = False
+                break
 
-        for value in self.allpoints:
+            else:
+                continue
             pass
+
+        return is_contained
       
 
