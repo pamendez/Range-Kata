@@ -79,37 +79,50 @@ class Range:
 
       return interval
 
-    def contains(self, elements:set):
+    def contains(self, range_or_elements: set | Range):
         """
-           Returns True if the values contains on range.
-           Otherwise, returns False.
+            Given the type of the input:
+
+            a. If the input is a set of elements:
+                Returns True if the values are contained on range.
+                Otherwise, it returns False.
+
+            b. If the input is range:
+                Returns True if the range is contained inside another range.
+                Otherwise, it returns False.
+
+            Arguments
+            ----------
+            elements - A set of the elements.
+
+            Exceptions
+            -----------
+            TBA.
         """
 
         is_contained = True
-        for value in elements:
-            if not (value in self.allpoints):
+        if (type(range_or_elements) is set):            
+            elements = range_or_elements
+            if not (len(elements) > 0):
+                raise ValueError("The input set is empty.")
+
+            for value in elements:
+                if not (value in self.allpoints):
+                    is_contained = False
+                    break
+
+                else:
+                    continue
+                pass
+
+        elif (type(range_or_elements) is Range):
+            range_ = range_or_elements
+            if not (self.endpoints[0] <= range_.endpoints[0] and range_.endpoints[1] <= self.endpoints[1]):
                 is_contained = False
-                break
+                pass
+            pass
 
-            else:
-                continue
+        else:
             pass
 
         return is_contained
-
-
-    def constains(self, range_:Range):
-        """
-           Returns True if the ranges contains on range.
-           Otherwise, returns False.
-        """
-
-        is_contained = True
-        if not (self.endpoints[0] <= range_.endpoints[0] and range_.endpoints[1] <= self.endpoints[1]):
-            is_contained = False
-            pass
-
-        return is_contained
-    
-      
-

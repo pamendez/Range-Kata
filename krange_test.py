@@ -70,15 +70,21 @@ class TestRangeAsString:
     pass
 
 class TestRangeContainsElements:
-    def test_range_contains_elements(self):
+    def test_with_range_contains_elements_returns_true(self):
         input_range= "[2,6)"
         rng = Range(input_range)
-        assert rng.contains(elements=[2,4]) == True
+        assert rng.contains(range_or_elements=set([2,4])) == True
     
-    def test_range_does_not_contains_elements(self):
+    def test_with_range_does_not_contains_elements_returns_false(self):
         input_range = "[2,6)"
         rng = Range(input_range)
-        assert rng.contains(elements=[-1, 1, 6, 10]) == False
+        assert rng.contains(range_or_elements=set([-1, 1, 6, 10])) == False
+    
+    def test_with_range_contains_empty_throws_value_error(self):
+        input_range = "[1, 4]"
+        rng = Range(input_range)
+        with pytest.raises(ValueError):
+            rng.contains(range_or_elements=set())
     pass
 
 class TestRangeContainsOtherRange:
@@ -86,7 +92,7 @@ class TestRangeContainsOtherRange:
     def test_range_doesnt_contains_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
-        assert rng1.contains(range_ = rng2) == False
+        assert rng1.contains(range_or_elements=rng2) == False
         pass
     pass
 
@@ -94,6 +100,6 @@ class TestRangeContainsOtherRange:
     def test_range_contains_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
-        assert rng1.contains(range_ = rng2) == True
+        assert rng1.contains(range_or_elements= rng2) == True
         pass
     pass
