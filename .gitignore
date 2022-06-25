@@ -7,3 +7,8 @@ __pycache__
 
 # PyCharm IDEA files
 .idea
+
+# PIP Binary Files
+package/build
+package/dist
+package/*.egg-info

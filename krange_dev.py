@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 ALLOWED_CHARACTERS = { "[", "]", "(", ")", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", " ", "," }
 
 class Range:
@@ -70,6 +69,16 @@ class Range:
     def to_string(self):
         """
             Returns the range as a formatted string.
+
+            Arguments:
+            -------------
+
+            None
+
+            Exceptions:
+            -------------
+
+            None
         """       
         return f"{self.endpoint_symbols[0]}{self.raw_endpoints[0]},{self.raw_endpoints[1]}{self.endpoint_symbols[1]}"
 
@@ -87,17 +96,15 @@ class Range:
         """
             Given the type of the input:
 
-            a. If the input is a set of elements:
-                Returns True if the values are contained on range.
-                Otherwise, it returns False.
+                a. If the input is a set of elements:
+                Returns True if the values are contained on range. Otherwise, it returns False.
 
-            b. If the input is range:
-                Returns True if the range is contained inside another range.
-                Otherwise, it returns False.
+                b. If the input is range:
+                Returns True if the range is contained inside another range. Otherwise, it returns False.
 
             Arguments
             ----------
-            elements - A set of the elements.
+            elements - The set of the elements to check in the range.
 
             Exceptions
             -----------
@@ -137,43 +144,48 @@ class Range:
 
         return is_contained
 
-    def equals(self, _range):
+    def equals(self, range_to_compare: Range):
         """
             Given another range, if the endpoints are equal between the two
             it returns True. Otherwise it returns False.
 
             Arguments:
             ------------
-           _range
+           
+           range_to_compare - The range to evaluate whether it is equal to the main range.
  
             Exceptions:
-            ------------   
-        """
-        if (_range.endpoints[0] == self.endpoints[0] and _range.endpoints[1] == self.endpoints[1]):
-            return True
-        else: 
-            return False 
-        pass
-    pass
+            ------------
 
-    def overlapsRange(self,_range:Range):
+            None
+        """
+        if (range_to_compare.endpoints[0] == self.endpoints[0] and 
+            range_to_compare.endpoints[1] == self.endpoints[1]):
+            return True
+        
+        return False 
+        
+    def overlapsRange(self, range_to_compare: Range):
         """
          Given another range, if the points are overlaps between the two
          it returns True. Otherwise it returns False.
 
             Arguments:
             ------------
-           _range
+           
+           range_to_compare: The range to evaluate whether it overlaps or not.
  
             Exceptions:
             ------------ 
+
+            None
         
         """
         is_overlaping = False
-        for value in _range.allpoints: 
+        for value in range_to_compare.allpoints: 
          if (value in self.allpoints):
             is_overlaping = True
             break
 
         return is_overlaping
-        pass
+    pass

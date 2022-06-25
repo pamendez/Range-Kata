@@ -1,5 +1,5 @@
 import pytest
-from krange import Range
+from krange_dev import Range
 
 class TestRangeConstructor:     
     def test_with_empty_range_throws_syntax_error(self):
@@ -71,7 +71,6 @@ class TestRangeAsString:
         assert rng.to_string() == result
 
 class TestRangeContainsElements:
-    
     def test_with_range_contains_elements_returns_true(self):
         input_range= "[2,6)"
         rng = Range(input_range)
@@ -114,7 +113,7 @@ class TestRangeContainsOtherRange:
     def test_range_contains_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
-        assert rng1.contains(range_or_elements= rng2) == True
+        assert rng1.contains(range_or_elements=rng2) == True
         pass
     pass
 
@@ -123,14 +122,14 @@ class TestRangeEqualsOtherRange:
     def test_range_equals_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
-        assert rng1.equals(_range = rng2) == True
+        assert rng1.equals(range_to_compare=rng2) == True
         pass
 
     @pytest.mark.parametrize("input_range1, input_range2", [("[2,10) ", "[3,5)"), ("[2,5) ", "[3,10)"), ("[3,5) ", "[2,10)")])
     def test_range_not_equals_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
-        assert rng1.equals(_range = rng2) == False
+        assert rng1.equals(range_to_compare=rng2) == False
         pass
     pass
 
@@ -139,13 +138,13 @@ class TestRangeOverlapsRange:
     def test_range_doesnt_overlaps_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
-        assert rng1.overlapsRange(_range = rng2) == False
+        assert rng1.overlapsRange(range_to_compare=rng2) == False
         pass
 
     @pytest.mark.parametrize("input_range1, input_range2", [("[2,10)", "[3,5)"), ("[3,5)", "[3,5)"), ("[2,5)", "[3,10)"), ("[3,5)", "[2,10)")])
     def test_range_overlaps_another_range(self,input_range1,input_range2):
         rng1 = Range(input_range1)
         rng2 = Range(input_range2)
-        assert rng1.overlapsRange(_range = rng2) == True
+        assert rng1.overlapsRange(range_to_compare=rng2) == True
         pass
     pass
