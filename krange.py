@@ -7,6 +7,7 @@ class Range:
         Serves as the range class for operations using interval inputs.
     """
     
+    raw_endpoints = None
     endpoints = None
     allpoints = None
     endpoint_symbols = None
@@ -24,6 +25,7 @@ class Range:
             SyntaxError: Throws this exception if the input is not formatted properly.
         """
 
+        input_range = input_range.strip()
         if not (all(range_symbol in ALLOWED_CHARACTERS for range_symbol in input_range)):
             raise SyntaxError("The range input has invalid symbols or is not formatted properly.")
 
@@ -40,6 +42,7 @@ class Range:
             raise IndexError("The range has more or less than two components.")
         
         self.endpoints = []
+        self.raw_endpoints = []
         for limit in limits:
             limit = limit.strip()
             if not (limit.isdigit()):
@@ -47,6 +50,7 @@ class Range:
             
             numberLimit = int(limit)
             self.endpoints.append(numberLimit)
+            self.raw_endpoints.append(numberLimit)
 
         # Validate intervals symbols
         if(lower_bound == "("):
@@ -67,7 +71,7 @@ class Range:
         """
             Returns the range as a formatted string.
         """       
-        return f"{self.endpoint_symbols[0]}{self.endpoints[0]},{self.endpoints[1]}{self.endpoint_symbols[1]}"
+        return f"{self.endpoint_symbols[0]}{self.raw_endpoints[0]},{self.raw_endpoints[1]}{self.endpoint_symbols[1]}"
 
     def getAllPoints(self):
       index = self.endpoints[0]
@@ -130,6 +134,22 @@ class Range:
 
         else:
             raise TypeError("The type of the input is invalid")
-            pass
 
         return is_contained
+
+    def equals(self, _range):
+        """
+            Given another range, if the endpoints are equal between the two
+            it returns True. Otherwise it returns False.
+
+            Arguments:
+            ------------
+
+
+            Exceptions:
+            ------------
+            
+        """
+
+        pass
+    pass

@@ -26,12 +26,6 @@ class TestRangeConstructor:
             rng = Range(input_range)
         pass
     
-    def test_with_valid_input_return_endpoint(self):
-        input_range = "(2, 4]"
-        rng = Range(input_range)
-        assert rng.endpoints == [3,4]
-        pass
-
     def test_with_invalid_input_throws_value_error(self):
         input_range = "(6, 4]"
         with pytest.raises(ValueError):
@@ -49,24 +43,38 @@ class TestRangeConstructor:
         assert type(rng) is Range
         pass
 
+    def test_with_spaced_input_returns_instance(self):
+        input_range = " [3, 4] "
+        rng = Range(input_range)
+        assert type(rng) is Range
+        pass
+    pass
+
+class TestRangeEndPoints:
+    def test_with_valid_input_return_endpoint(self):
+        input_range = "(2, 4]"
+        rng = Range(input_range)
+        assert rng.endpoints == [3,4]
+        pass
+    pass
+
+class TestRangeAllPoints:
     def test_with_valid_range_return_allpoints(Self):
         input_range = "[3, 7]"
         rng = Range(input_range)
         assert rng.allpoints == [3, 4, 5, 6, 7]
     pass
 
-    def test_with_valid_range_return_allpoints(Self):
-        input_range = "(3, 8)"
-        rng = Range(input_range)
-        assert rng.allpoints == [4, 5, 6, 7]
-    pass
-
 class TestRangeAsString:
-    def test_show_range_as_formatted_string(self):
+    def test_with_closed_range_show_as_formatted_string(self):
         input_range = "[4,               10]"
         rng = Range(input_range)
         assert rng.to_string() == "[4,10]"
-        pass
+
+    def test_with_semiopen_range_show_as_formatted_string(self):
+        input_range = "(7,               10]"
+        rng = Range(input_range)
+        assert rng.to_string() == "(7,10]"
     pass
 
 class TestRangeContainsElements:
