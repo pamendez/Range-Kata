@@ -156,7 +156,7 @@ class Range:
         pass
     pass
 
-    def overlapsRange(self,_range):
+    def overlapsRange(self,_range:Range):
         """
          Given another range, if the points are overlaps between the two
          it returns True. Otherwise it returns False.
@@ -169,4 +169,11 @@ class Range:
             ------------ 
         
         """
+        is_overlaping = False
+        for value in _range.allpoints: 
+         if (value in self.allpoints):
+            is_overlaping = True
+            break
+
+        return is_overlaping
         pass
