@@ -66,18 +66,13 @@ class TestRangeAllPoints:
     pass
 
 class TestRangeAsString:
-    def test_with_closed_range_show_as_formatted_string(self):
-        input_range = "[4,               10]"
+    @pytest.mark.parametrize("input_range, result", [("[4,               10]", "[4,10]"), (" (7,10] ", "(7,10]")]) 
+    def test_with_closed_range_show_as_formatted_string(self, input_range, result):
         rng = Range(input_range)
-        assert rng.to_string() == "[4,10]"
-
-    def test_with_semiopen_range_show_as_formatted_string(self):
-        input_range = "(7,               10]"
-        rng = Range(input_range)
-        assert rng.to_string() == "(7,10]"
-    pass
+        assert rng.to_string() == result
 
 class TestRangeContainsElements:
+    
     def test_with_range_contains_elements_returns_true(self):
         input_range= "[2,6)"
         rng = Range(input_range)
