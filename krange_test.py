@@ -74,7 +74,7 @@ class TestRangeContainsElements:
     def test_with_range_contains_elements_returns_true(self):
         input_range= "[2,6)"
         rng = Range(input_range)
-        assert rng.contains(range_or_elements= set([2,4])) == True
+        assert rng.contains(range_or_elements=set([2,4])) == True
     
     def test_with_range_does_not_contains_elements_returns_false(self):
         input_range = "[2,6)"
@@ -87,11 +87,11 @@ class TestRangeContainsElements:
         with pytest.raises(ValueError):
             rng.contains(range_or_elements=set([]))
     
-    def test_with_range_contains_invalid_type_throws_Type_error(self):
+    def test_with_range_contains_invalid_type_throws_type_error(self):
         input_range = "[1, 4]"
         rng = Range(input_range)
         with pytest.raises(TypeError):
-            rng.contains(range_or_elements="j")
+            rng.contains(range_or_elements=["j"])
     
     def test_with_range_contains_valid_type_but_invalid_carather_throws_exception(self):
         input_range = "[1, 4]"

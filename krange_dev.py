@@ -66,7 +66,7 @@ class Range:
 
         pass
 
-    def to_string(self):
+    def to_string(self) -> str:
         """
             Returns the range as a formatted string.
 
@@ -92,7 +92,7 @@ class Range:
 
       return interval
 
-    def contains(self, range_or_elements: str | list | Range):
+    def contains(self, range_or_elements: str | set | Range) -> bool:
         """
             Given the type of the input:
 
@@ -115,11 +115,9 @@ class Range:
             TypeError
         """
 
-        is_contained = True
         elements = range_or_elements
         if (type(elements) is str):      
-            elements = [x.strip() for x in range_or_elements.split(",")]
-            elements = set(elements)
+            elements = set(x.strip() for x in range_or_elements.split(","))
             pass
 
         if (type(elements) is set):
@@ -127,27 +125,31 @@ class Range:
                 raise ValueError("The input set is empty.")
 
             for value in elements:
-                if not (value in self.allpoints):
-                    is_contained = False
-                    break
+                if not (type(value) is int):
+                    if not (value.isdigit()):
+                        raise Exception("A value in the set in not a digit.")    
 
-                else:
-                    continue
+                    else:
+                        value = int(value)
+                        if not (value in self.allpoints):
+                            return False
+
+                        else:
+                            continue
                 
-
         elif (type(elements) is Range):
             range_ = elements
-            if not (self.endpoints[0] <= range_.endpoints[0] and range_.endpoints[1] <= self.endpoints[1]):
-                is_contained = False
-                pass
+            if not (self.endpoints[0] <= range_.endpoints[0] and 
+                    range_.endpoints[1] <= self.endpoints[1]):
+                return False
             pass
 
         else:
             raise TypeError("The type of the input is invalid")
 
-        return is_contained
+        return True
 
-    def equals(self, range_to_compare: Range):
+    def equals(self, range_to_compare: Range) -> bool:
         """
             Given another range, if the endpoints are equal between the two
             it returns True. Otherwise it returns False.
@@ -168,7 +170,7 @@ class Range:
         
         return False 
         
-    def overlapsRange(self, range_to_compare: Range):
+    def overlapsRange(self, range_to_compare: Range) -> bool:
         """
          Given another range, if the points are overlaps between the two
          it returns True. Otherwise it returns False.
