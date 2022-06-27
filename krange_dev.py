@@ -116,27 +116,13 @@ class Range:
         """
 
         is_contained = True
+        elements = None
         if (type(range_or_elements) is str):      
-            elements = set(range_or_elements.split(","))
-            if not (len(elements) > 0):
-                raise ValueError("The input set is empty.")
+            elements = set([x.strip() for x in range_or_elements.split(",")])
+            pass
 
-            for value in elements:                    
-                value = value.strip()               
-                if not (value.isdigit()):
-                    raise Exception("A value in the set is not a digit.")
-                    
-                value = int(value)
-                if not (value in self.allpoints):
-                    is_contained = False
-                    break
-
-                else:
-                    continue
-                pass
-
-        elif (type(range_or_elements) is list):
-            elements = set(range_or_elements)
+        if (type(range_or_elements) is set):
+            elements = range_or_elements
             if not (len(elements) > 0):
                 raise ValueError("The input set is empty.")
 
