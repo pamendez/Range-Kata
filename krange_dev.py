@@ -90,6 +90,17 @@ class Range:
 
     def getAllPoints(self):
         """
+            Returns every points contained in the range. 
+
+            Arguments:
+            -------------
+
+            None
+
+            Exceptions:
+            -------------
+
+            None
         """
 
         index = self.endpoints[0]
@@ -108,7 +119,7 @@ class Range:
                 a. If the input is a string of elements, after converting it to a set of elements:
                 Returns True if the values are contained on range. Otherwise, it returns False.
 
-                b. If the input is a list of elements, after converting it to a set of elements:
+                b. If the input is a set:
                 Returns True if the values are contained on range. Otherwise, it returns False.
 
                 c. If the input is range:
@@ -116,12 +127,12 @@ class Range:
 
             Arguments
             ----------
-            elements - The set of the elements to check in the range.
+            range_or_elements - The set of the elements to check in the range.
 
             Exceptions
             -----------
-            ValueError
-            TypeError
+            ValueError - Throws this exception when one of the values is not a valid number.
+            TypeError -  Throws this exception when the input is not a string, set or range.  
         """
         is_contained = True
         elements = range_or_elements
@@ -132,15 +143,27 @@ class Range:
         if (type(elements) is set):
             if not (len(elements) > 0):
                 raise ValueError("The input set is empty.")
-
+            is_negative = False
             for value in elements:
                 if not (type(value) is int):
                     value = value.strip()
+
+                    if (value.startswith("-")):
+                        value = value.lstrip("-")
+                    is_negative = True
+                    pass
+
                     if not (value.isdigit()):
                         raise Exception("A value in the set in not a digit.")    
                     else:
-                        value = int(value)
+                        if is_negative == True:
+                            value = int(value) * (-1)
+                            pass
+                        else:
+                            value = int(value)
+                            pass
                         pass
+                    
                 if not (value in self.allpoints):
                     is_contained = False
                     break
