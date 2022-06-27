@@ -25,25 +25,15 @@ class TestRangeConstructor:
         with pytest.raises(Exception):
             rng = Range(input_range)
         pass
-    
-    def test_with_invalid_input_throws_value_error(self):
-        input_range = "(6, 4]"
+
+    @pytest.mark.parametrize("input_range", [("(4,4)"), ("[10, 2]"), ("(3, -1]")])
+    def test_with_lower_limit_greater_than_upper_limit_returns_value_error(self, input_range):
         with pytest.raises(ValueError):
             rng = Range(input_range)
-
-    def test_with_valid_input_doesnt_throws_value_error(self):
-        input_range = "[2, 4]"
-        rng = Range(input_range)
-        assert type(rng) is Range
-
-    def test_with_valid_input(self):
-        input_range = "[3, 4]"
-        rng = Range(input_range)
-        assert type(rng) is Range
         pass
 
-    def test_with_spaced_input_returns_instance(self):
-        input_range = " [3, 4] "
+    @pytest.mark.parametrize("input_range", [("[3, 4]"), ("[1     ,   10]"), ("(1, 3)"), ("[-20, -10]")])
+    def test_with_valid_inputs(self, input_range):
         rng = Range(input_range)
         assert type(rng) is Range
         pass

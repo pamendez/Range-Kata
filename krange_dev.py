@@ -6,11 +6,6 @@ class Range:
         Serves as the range class for operations using interval inputs.
     """
     
-    raw_endpoints = None
-    endpoints = None
-    allpoints = None
-    endpoint_symbols = None
-
     def __init__(self, input_range: str) -> None:
         """
             Serves as the constructor of the class.
@@ -33,15 +28,14 @@ class Range:
         
         lower_bound = input_range[0] 
         upper_bound = input_range[-1]
-        input_range = input_range.replace(lower_bound, "", 1)
-        input_range = input_range.replace(upper_bound, "", 1)
+        input_range = input_range.replace(lower_bound, "", 1).replace(upper_bound, "", 1)
         limits = input_range.split(",");
 
         if not (len(limits) == 2):
             raise IndexError("The range has more or less than two components.")
         
         self.endpoints = []
-        self.raw_endpoints = []
+        self.original_endpoints = []
         for limit in limits:
             limit = limit.strip()
             is_negative = False
@@ -49,12 +43,20 @@ class Range:
                 limit = limit.lstrip("-")
                 is_negative = True
                 pass
+
             if not (limit.isdigit()):
                 raise Exception("The range has invalid numbers.")
             
-            numberLimit = int(limit)
+            if not (is_negative):
+                numberLimit = int(limit)
+                pass  
+            
+            else: 
+                numberLimit = int(limit) * (-1)
+                pass
+
             self.endpoints.append(numberLimit)
-            self.raw_endpoints.append(numberLimit)
+            self.original_endpoints.append(numberLimit)
 
         # Validate intervals symbols
         if(lower_bound == "("):
@@ -68,7 +70,6 @@ class Range:
 
         self.endpoint_symbols = [lower_bound, upper_bound]
         self.allpoints = self.getAllPoints()
-
         pass
 
     def to_string(self) -> str:
@@ -85,17 +86,20 @@ class Range:
 
             None
         """       
-        return f"{self.endpoint_symbols[0]}{self.raw_endpoints[0]},{self.raw_endpoints[1]}{self.endpoint_symbols[1]}"
+        return f"{self.endpoint_symbols[0]}{self.original_endpoints[0]},{self.original_endpoints[1]}{self.endpoint_symbols[1]}"
 
     def getAllPoints(self):
-      index = self.endpoints[0]
-      interval = []
-      while index <= self.endpoints[1]:
-         interval.append(index)
-         index += 1
-         pass 
+        """
+        """
 
-      return interval    
+        index = self.endpoints[0]
+        interval = []
+        while index <= self.endpoints[1]:
+            interval.append(index)
+            index += 1
+            pass 
+
+        return interval    
 
     def contains(self, range_or_elements: str | set | Range) -> bool:
         """
