@@ -5,12 +5,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="krange",
-    version=1.0,
+    version=1.1,
     author="Pedro Arturo Mendez Cruz, Jean Michael Cuadrado, Belkis Yazmin Vásquez Peña",
     author_email="1088438@est.intec.edu.do, 1076992@est.intec.edu.do, 1085273@est.intec.edu.do",
     maintainers="Pedro Arturo Mendez Cruz",
     description="A range / interval package.",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/pamendez/Range-Kata",
     packages=setuptools.find_packages(),
     install_requires=[],
