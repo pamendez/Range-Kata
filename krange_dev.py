@@ -116,13 +116,13 @@ class Range:
         """
 
         is_contained = True
-        elements = None
-        if (type(range_or_elements) is str):      
-            elements = set([x.strip() for x in range_or_elements.split(",")])
+        elements = range_or_elements
+        if (type(elements) is str):      
+            elements = [x.strip() for x in range_or_elements.split(",")]
+            elements = set(elements)
             pass
 
-        if (type(range_or_elements) is set):
-            elements = range_or_elements
+        if (type(elements) is set):
             if not (len(elements) > 0):
                 raise ValueError("The input set is empty.")
 
@@ -133,10 +133,10 @@ class Range:
 
                 else:
                     continue
-                pass
+                
 
-        elif (type(range_or_elements) is Range):
-            range_ = range_or_elements
+        elif (type(elements) is Range):
+            range_ = elements
             if not (self.endpoints[0] <= range_.endpoints[0] and range_.endpoints[1] <= self.endpoints[1]):
                 is_contained = False
                 pass
