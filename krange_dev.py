@@ -44,6 +44,11 @@ class Range:
         self.raw_endpoints = []
         for limit in limits:
             limit = limit.strip()
+            is_negative = False
+            if (limit.startswith("-")):
+                limit = limit.lstrip("-")
+                is_negative = True
+                pass
             if not (limit.isdigit()):
                 raise Exception("The range has invalid numbers.")
             
@@ -90,7 +95,7 @@ class Range:
          index += 1
          pass 
 
-      return interval
+      return interval    
 
     def contains(self, range_or_elements: str | set | Range) -> bool:
         """
