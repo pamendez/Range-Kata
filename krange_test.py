@@ -74,18 +74,18 @@ class TestRangeContainsElements:
     def test_with_range_contains_elements_returns_true(self):
         input_range= "[2,6)"
         rng = Range(input_range)
-        assert rng.contains(range_or_elements=set([2,4])) == True
+        assert rng.contains(range_or_elements=[2,4]) == True
     
     def test_with_range_does_not_contains_elements_returns_false(self):
         input_range = "[2,6)"
         rng = Range(input_range)
-        assert rng.contains(range_or_elements=set([-1, 1, 6, 10])) == False
+        assert rng.contains(range_or_elements=[-1, 1, 6, 10]) == False
     
     def test_with_range_contains_empty_throws_value_error(self):
         input_range = "[1, 4]"
         rng = Range(input_range)
         with pytest.raises(ValueError):
-            rng.contains(range_or_elements=set())
+            rng.contains(range_or_elements=[])
     
     def test_with_range_contains_invalid_type_throws_Type_error(self):
         input_range = "[1, 4]"
@@ -97,7 +97,14 @@ class TestRangeContainsElements:
         input_range = "[1, 4]"
         rng = Range(input_range)
         with pytest.raises(Exception):
-            rng.contains(range_or_elements=set(["2","3","4","j"]))
+            rng.contains(range_or_elements=["2","3","4","j"])
+
+    def test_with_range_contains_valid_but_spaced_inputs_returns_true(self):
+        input_range = "[2, 11)"
+        rng = Range(input_range)
+        elements = ["3, 6,    8,  9,    10"]
+        assert rng.contains(elements) == True 
+        pass
     pass
 
 class TestRangeContainsOtherRange:

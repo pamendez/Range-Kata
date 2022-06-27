@@ -92,14 +92,17 @@ class Range:
 
       return interval
 
-    def contains(self, range_or_elements: set | Range):
+    def contains(self, range_or_elements: str | list | Range):
         """
             Given the type of the input:
 
-                a. If the input is a set of elements:
+                a. If the input is a string of elements, after converting it to a set of elements:
                 Returns True if the values are contained on range. Otherwise, it returns False.
 
-                b. If the input is range:
+                b. If the input is a list of elements, after converting it to a set of elements:
+                Returns True if the values are contained on range. Otherwise, it returns False.
+
+                c. If the input is range:
                 Returns True if the range is contained inside another range. Otherwise, it returns False.
 
             Arguments
@@ -113,17 +116,31 @@ class Range:
         """
 
         is_contained = True
-        if (type(range_or_elements) is set):      
-            elements = range_or_elements
+        if (type(range_or_elements) is str):      
+            elements = set(range_or_elements.split(","))
+            if not (len(elements) > 0):
+                raise ValueError("The input set is empty.")
+
+            for value in elements:                    
+                value = value.strip()               
+                if not (value.isdigit()):
+                    raise Exception("A value in the set is not a digit.")
+                    
+                value = int(value)
+                if not (value in self.allpoints):
+                    is_contained = False
+                    break
+
+                else:
+                    continue
+                pass
+
+        elif (type(range_or_elements) is list):
+            elements = set(range_or_elements)
             if not (len(elements) > 0):
                 raise ValueError("The input set is empty.")
 
             for value in elements:
-                if not (type(value) is int):                   
-                 if not (value.isdigit()):
-                    raise Exception("A value in the set is not a digit")
-                    
-                value = int(value)
                 if not (value in self.allpoints):
                     is_contained = False
                     break
