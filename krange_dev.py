@@ -150,13 +150,13 @@ class Range:
 
                     if (value.startswith("-")):
                         value = value.lstrip("-")
-                    is_negative = True
+                        is_negative = True
                     pass
 
                     if not (value.isdigit()):
                         raise Exception("A value in the set in not a digit.")    
                     else:
-                        if is_negative == True:
+                        if (is_negative == True):
                             value = int(value) * (-1)
                             pass
                         else:
