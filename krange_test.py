@@ -50,10 +50,10 @@ class TestRangeConstructor:
     pass
 
 class TestRangeEndPoints:
-    def test_with_valid_input_return_endpoint(self):
-        input_range = "(2, 4]"
+    @pytest.mark.parametrize("input_range, result", [("(2, 4]", [3,4]), ("[-3,5]", [-3,5]), ("[4,7)", [4,6]), ("(4,8)", [5,7]), ("[2,3)", [2,2])]) 
+    def test_with_valid_input_return_endpoint(self,input_range,result):
         rng = Range(input_range)
-        assert rng.endpoints == [3,4]
+        assert rng.endpoints == result
         pass
     pass
 
@@ -79,7 +79,7 @@ class TestRangeContainsElements:
     def test_with_range_does_not_contains_elements_returns_false(self):
         input_range = "[2,6)"
         rng = Range(input_range)
-        assert rng.contains(range_or_elements=set([-1, 1, 6, 10])) == False
+        assert rng.contains(range_or_elements = set([-1, 1, 6, 10])) == False
     
     def test_with_range_contains_empty_throws_value_error(self):
         input_range = "[1, 4]"

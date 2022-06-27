@@ -114,7 +114,7 @@ class Range:
             ValueError
             TypeError
         """
-
+        is_contained = True
         elements = range_or_elements
         if (type(elements) is str):      
             elements = set(x.strip() for x in range_or_elements.split(","))
@@ -126,28 +126,29 @@ class Range:
 
             for value in elements:
                 if not (type(value) is int):
+                    value = value.strip()
                     if not (value.isdigit()):
                         raise Exception("A value in the set in not a digit.")    
-
                     else:
                         value = int(value)
-                        if not (value in self.allpoints):
-                            return False
-
-                        else:
-                            continue
+                        pass
+                if not (value in self.allpoints):
+                    is_contained = False
+                    break
+                else:
+                    continue
                 
         elif (type(elements) is Range):
             range_ = elements
             if not (self.endpoints[0] <= range_.endpoints[0] and 
                     range_.endpoints[1] <= self.endpoints[1]):
-                return False
+                is_contained = False
             pass
 
         else:
             raise TypeError("The type of the input is invalid")
 
-        return True
+        return is_contained
 
     def equals(self, range_to_compare: Range) -> bool:
         """
